@@ -298,7 +298,7 @@ const express = require('express')
 const expressApp = express()
 
 const PORT = process.env.PORT || 3000;
-const URL = process.env.URL || 'https://your-heroku-app.herokuapp.com';
+const URL = process.env.URL || 'https://searchmoviesbot.herokuapp.com';
 
 bot.telegram.setWebhook(`${URL}/bot${API_TOKEN}`);
 bot.startWebhook(`/bot${API_TOKEN}`, null, PORT)
