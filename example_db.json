@@ -1,0 +1,24 @@
+{
+  "sessions": [
+    {
+      "id": "468440854:468440854",
+      "data": {
+        "counter": 1,
+        "title": "./start",
+        "maxPage": 18,
+        "counterp": 1,
+        "newfavtitle": "Люди Икс: Апокалипсис",
+        "newfavid": 246655,
+        "newfavdate": "2016-05-18"
+      }
+    },
+    {
+      "id": "456418386:456418386",
+      "data": {
+        "counter": 1,
+        "title": "710832",
+        "maxPage": 1
+      }
+    }
+  ]
+}

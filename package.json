@@ -1,0 +1,24 @@
+{
+  "name": "jstelbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "-": "0.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20",
+    "node-fetch": "^2.6.0",
+    "sqlite3": "^4.2.0",
+    "telegraf": "^3.38.0",
+    "telegraf-session-local": "^1.0.3",
+    "telegraf-widget": "^0.1.0"
+  },
+  "engines": {
+    "node": "12.13.1"
+  }
+}
