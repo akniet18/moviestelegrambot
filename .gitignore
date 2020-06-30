@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 example_db.json
+sqlite.db
