@@ -71,7 +71,7 @@ bot.hears('⭐️ Favorites', ctx => {
                 ctx.replyWithHTML(html)
             }
         }else{
-            const html = "У вас нет избранных фильмов"
+            const html = "**У вас нет избранных фильмов**\nДля того чтобы добавить свой первый фильм или сериал в избранное, откройте карточку по фильму или сериалу и нажмите внизу на кнопку «Добавить в избранное»"
             ctx.replyWithMarkdown(html)
         }
     })     
@@ -82,10 +82,14 @@ bot.on('message', (ctx) => {
     if (ctx.message.text.slice(0, 2) == "/f"){
         let a = ctx.message.text.slice(2)
         getDetail(a, ctx)
-    }else{
+    }else if (ctx.message.text.slice(0, 2) == "/s"){
+        let id = ctx.message.text.slice(2)
         ctx.session.counter = 1
-        ctx.session.title = ctx.message.text
-        getSimilar(ctx.message.text, 1, ctx)
+        ctx.session.title = id
+        getSimilar(id, 1, ctx)
+    }
+    else{
+        searchMovie(ctx.message.text, ctx)
     }
 })
 
@@ -147,7 +151,7 @@ bot.on('inline_query', async ({ inlineQuery, answerInlineQuery }) => {
                 description: title,
                 thumb_url: "https://image.tmdb.org/t/p/w220_and_h330_face" + poster_path,
                 input_message_content: {
-                    message_text: id
+                    message_text: "/s"+id
                 }
             }))
             return answerInlineQuery(recipes)
@@ -296,10 +300,30 @@ ${genre}
 }
 
 
-const PORT = process.env.PORT || 3000;
-const URL = process.env.URL || 'https://searchmoviesbot.herokuapp.com';
+function searchMovie(title, ctx){
+    const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=84e405af37cd3cba01b5109bc70e3baa&language=ru-RU&page=1&include_adult=false&query=${encodeURIComponent(title)}`
+    fetch(apiUrl).then(r=>{
+        return r.json()
+    })
+    .then(r=>{
+        if (typeof(r.results) != "undefined"){
+            const html = r.results.map(element => {
+                return `● <b>${element.title}</b>  (${element.release_date}) /f${element.id}`
+            }).join('\n')        
+            ctx.replyWithHTML(html)
+        }
+        else{
+            const html = '<b>Not found</b>'
+            ctx.replyWithHTML(html)
+        }
+    })
+}
 
-bot.telegram.setWebhook(`${URL}/bot${token}`);
-bot.startWebhook(`/bot${token}`, null, PORT)
+
+// const PORT = process.env.PORT || 3000;
+// const URL = process.env.URL || 'https://searchmoviesbot.herokuapp.com';
+
+// bot.telegram.setWebhook(`${URL}/bot${token}`);
+// bot.startWebhook(`/bot${token}`, null, PORT)
 
 bot.launch()
