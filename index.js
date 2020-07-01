@@ -320,10 +320,10 @@ function searchMovie(title, ctx){
 }
 
 
-// const PORT = process.env.PORT || 3000;
-// const URL = process.env.URL || 'https://searchmoviesbot.herokuapp.com';
+const PORT = process.env.PORT || 3000;
+const URL = process.env.URL || 'https://searchmoviesbot.herokuapp.com';
 
-// bot.telegram.setWebhook(`${URL}/bot${token}`);
-// bot.startWebhook(`/bot${token}`, null, PORT)
+bot.telegram.setWebhook(`${URL}/bot${token}`);
+bot.startWebhook(`/bot${token}`, null, PORT)
 
 bot.launch()
